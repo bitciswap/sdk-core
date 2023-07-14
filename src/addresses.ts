@@ -135,6 +135,17 @@ const BASE_GOERLI_ADDRESSES: ChainAddresses = {
   swapRouter02Address: '0x8357227D4eDc78991Db6FDB9bD6ADE250536dE1d'
 }
 
+// BITCI v3 addresses
+const BITCI_ADDRESSES: ChainAddresses = {
+  v3CoreFactoryAddress: '0xedD4cB9e1667017d9C4DEf2C288B6c7fA59Df3A6',
+  multicallAddress: '0xe24031af5F3324299afC70657d39Cd99d6A633CF',
+  quoterAddress: '0x0826981CC48b53156eA04CB7D31b823644AB93fD',
+  v3MigratorAddress: '0x9415d70d46255FAa09379E59c9C391A7520e44B5',
+  nonfungiblePositionManagerAddress: '0xeeB591f23E99be61B973dFd16d06f3ba031915Eb',
+  tickLensAddress: '0xB7E551021a381aBE1EaE12340D6F2405267d1FA7',
+  swapRouter02Address: '0x65Fc594DF47c87a3791F513B77E02Eb1D0Ac2D2E'
+}
+
 export const CHAIN_TO_ADDRESSES_MAP: Record<SupportedChainsType, ChainAddresses> = {
   [ChainId.MAINNET]: MAINNET_ADDRESSES,
   [ChainId.OPTIMISM]: OPTIMISM_ADDRESSES,
@@ -149,7 +160,8 @@ export const CHAIN_TO_ADDRESSES_MAP: Record<SupportedChainsType, ChainAddresses>
   [ChainId.ARBITRUM_GOERLI]: ARBITRUM_GOERLI_ADDRESSES,
   [ChainId.SEPOLIA]: SEPOLIA_ADDRESSES,
   [ChainId.AVALANCHE]: AVALANCHE_ADDRESSES,
-  [ChainId.BASE_GOERLI]: BASE_GOERLI_ADDRESSES
+  [ChainId.BASE_GOERLI]: BASE_GOERLI_ADDRESSES,
+  [ChainId.BITCI]: BITCI_ADDRESSES
 }
 
 /* V3 Contract Addresses */
@@ -181,7 +193,7 @@ export const MULTICALL_ADDRESSES: AddressMap = {
  * The oldest V0 governance address
  */
 export const GOVERNANCE_ALPHA_V0_ADDRESSES: AddressMap = constructSameAddressMap(
-  '0x5e4be8Bc9637f0EAA1A755019e06A68ce081D58F'
+    '0x5e4be8Bc9637f0EAA1A755019e06A68ce081D58F'
 )
 /**
  * The older V1 governance address
@@ -251,6 +263,8 @@ export const MIXED_ROUTE_QUOTER_V1_ADDRESSES: AddressMap = SUPPORTED_CHAINS.redu
 
 export const SWAP_ROUTER_02_ADDRESSES = (chainId: number) => {
   if (chainId == ChainId.BNB) {
+    return CHAIN_TO_ADDRESSES_MAP[chainId].swapRouter02Address
+  }else if(chainId == ChainId.BITCI){
     return CHAIN_TO_ADDRESSES_MAP[chainId].swapRouter02Address
   }
   return '0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45'
